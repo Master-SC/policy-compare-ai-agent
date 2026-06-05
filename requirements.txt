@@ -1,0 +1,6 @@
+streamlit
+pdfplumber
+sentence-transformers
+transformers
+accelerate
+torch
