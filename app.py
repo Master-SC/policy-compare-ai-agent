@@ -12,9 +12,16 @@ from transformers import pipeline
 model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 # Summarizer (CPU-friendly)
+# summarizer = pipeline(
+#     "text-generation",
+#     model="gpt2"
+# )
+
+# Summarizer (AMD-GPU Friendly)
 summarizer = pipeline(
     "text-generation",
-    model="gpt2"
+    model="meta-llama/Meta-Llama-3-8B-Instruct",
+    device=0
 )
 
 # -----------------------------
@@ -111,13 +118,28 @@ if pdf1 and pdf2:
     {text2[:2000]}
     """
 
+# Local Machine CPU Friendly
+#     with st.spinner("Generating summary..."):
+#         raw_output = summarizer(
+#             summary_input,
+#             max_length=300,
+#             num_return_sequences=1,
+#             do_sample=True,
+#             temperature=0.7
+#         )[0]["generated_text"]
+#     st.write(raw_output)
+
+# AMD GPU Processor
+
     with st.spinner("Generating summary..."):
-        raw_output = summarizer(
+        output = summarizer(
             summary_input,
-            max_length=300,
-            num_return_sequences=1,
-            do_sample=True,
-            temperature=0.7
+            max_new_tokens=300,
+            temperature=0.3,
+            do_sample=False
         )[0]["generated_text"]
 
-    st.write(raw_output)
+    st.write(output)
+
+
+
