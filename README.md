@@ -12,7 +12,6 @@ The Policy & Document Comparison Assistant helps organizations quickly understan
 
 ⚡ Fast, clean Streamlit UI
 
-Built for the TCS × AMD AI Hackathon (AGENTS_003).
 
 ✨ Features
 ✔ Exact Text Diff
